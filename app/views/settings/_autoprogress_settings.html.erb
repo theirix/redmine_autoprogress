@@ -1,0 +1,13 @@
+<%=t 'autoprogress.greeting' %>
+
+<p><label><%=t 'autoprogress.projects.label' %>: </label>
+  <%= select_tag 'settings[projects][]',
+    options_from_collection_for_select(Project.all.sort, 'id', 'name', @settings['projects']),
+    { multiple: true, size: 10} %>
+</p>
+
+<p><label><%=t 'autoprogress.tag.label' %>: </label>
+  <%= select_tag 'settings[tag]',
+    options_for_select(Issue.available_tags.collect{|u| [u.name, u.name]}.sort.uniq,
+      @settings['tag']) %>
+</p>

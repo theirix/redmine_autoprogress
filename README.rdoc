@@ -1,0 +1,26 @@
+= Redmine Autoprogress plugin
+
+Plugin automatially sets a progress (due ratio) for issues based on start and due dates.
+Matching issues can be filtered by projects and by a tag.
+
+This plugin requires redmine_tags plugin to be installed.
+
+Works with Redmine 4.x
+
+== Configuration
+
+Plugin provides a settings page where one can specify:
+* projects - matching issue must belong to one or more projects
+* tag - matching issue must have this tag
+
+== Launching
+
+Plugin provides two rake tasks:
+1. <tt>autoprogress:preview</tt> - Plugin finds affected issues and updates them.
+
+2. <tt>autoprogress:perform</tt> - Plugin finds affected issues and prints them to STDERR without actual updating.
+
+You can place into crontab something like that:
+
+	0 1 * * * cd REDMINE_ROOT && bundle exec rake autoprogress:perform RAILS_ENV=production
+

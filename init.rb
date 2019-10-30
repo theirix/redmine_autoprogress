@@ -1,10 +1,3 @@
-Rails.configuration.to_prepare do
-  unless Redmine::Plugin.registered_plugins[:redmine_tags]
-    # plugin requirement
-    raise 'Plugin requires Redmine Tags to be installed'
-  end
-end
-
 Redmine::Plugin.register :redmine_autoprogress do
   name 'Redmine Autoprogress plugin'
   author 'Eugene Seliverstov'

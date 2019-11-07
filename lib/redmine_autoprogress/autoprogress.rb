@@ -15,9 +15,9 @@ module RedmineAutoprogress
           progress_ratio = (Date.today - issue.start_date) / (issue.due_date - issue.start_date)
           # progress_ratio<1, progress should be in progress * 10
           # so round it by tenth - 60, 70 ... 100
-          progress = (progress_ratio * 10).ceil * 10
+          progress = (progress_ratio * 10).round * 10
           # cap by 100
-          progress = [progress, 100].min
+          progress = [0, [progress, 100].min].max
           # done_ratio must be not the same
           next unless issue.done_ratio.nil? || issue.done_ratio != progress
 

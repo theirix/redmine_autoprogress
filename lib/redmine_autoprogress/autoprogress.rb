@@ -34,11 +34,13 @@ module RedmineAutoprogress
     end
 
     def self.perform
-      enumerate_issues do |issue, progress|
-        STDERR.puts "Autoprogressing issue \##{issue.id} (#{issue.subject}) "\
-          "with progress #{progress}"
-        issue.done_ratio = progress
-        issue.save!
+      Mailer.with_synched_deliveries do
+        enumerate_issues do |issue, progress|
+          STDERR.puts "Autoprogressing issue \##{issue.id} (#{issue.subject}) "\
+            "with progress #{progress}"
+          issue.done_ratio = progress
+          issue.save!
+        end
       end
     end
   end

@@ -39,7 +39,7 @@ module RedmineAutoprogress
           STDERR.puts "Autoprogressing issue \##{issue.id} (#{issue.subject}) "\
             "with progress #{progress}"
           issue.done_ratio = progress
-          issue.save!
+          issue.save(validate: false)
         end
       end
     end

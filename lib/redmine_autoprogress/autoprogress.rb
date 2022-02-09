@@ -2,7 +2,7 @@ module RedmineAutoprogress
   class Autoprogress
     def self.enumerate_issues
       tag = Setting.plugin_redmine_autoprogress['tag']
-      projects = Setting.plugin_redmine_autoprogress['projects'].map { |pid| Project.find(pid) }
+      projects = Project.where({ id: Setting.plugin_redmine_autoprogress['projects'] })
       STDERR.puts("Check autoprogress for tag #{tag} and projects #{projects.map(&:name).join(', ')}")
 
       projects.each do |project|

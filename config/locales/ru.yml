@@ -1,0 +1,8 @@
+# English strings go here for Rails i18n
+ru:
+  autoprogress:
+    greeting: 'Плагин автопрогресса тикетов'
+    projects:
+      label: 'Обрабатываемые проекты'
+    tag:
+      label: 'Тэг для тикетов'

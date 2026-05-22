@@ -6,8 +6,10 @@
     { multiple: true, size: 10} %>
 </p>
 
+<% if Issue.respond_to?(:available_tags) %>
 <p><label><%=t 'autoprogress.tag.label' %>: </label>
   <%= select_tag 'settings[tag]',
     options_for_select(Issue.available_tags.collect{|u| [u.name, u.name]}.sort.uniq,
       @settings['tag']) %>
 </p>
+<% end %>

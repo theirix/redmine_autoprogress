@@ -8,7 +8,7 @@ module RedmineAutoprogress
       projects.each do |project|
         project.issues.open.each do |issue|
           next unless issue.start_date && issue.due_date && issue.due_date > issue.start_date
-          next unless issue.tag_list.include?(tag)
+          next if issue.respond_to?(:tag_list) && tag.present? && !issue.tag_list.include?(tag)
           next if issue.done_ratio_derived?
 
           # check if progress differs

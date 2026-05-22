@@ -3,9 +3,11 @@
 Plugin automatially sets a progress (due ratio) for issues based on start and due dates.
 Matching issues can be filtered by projects and by a tag.
 
-This plugin requires redmine_tags plugin to be installed.
+Optionally works with the any compatible tagging plugin that
+provides +tag_list+ on issues and +available_tags+ on Issue - redmine_tags or redmineup_tags. When the tags plugin is
+not installed, tag-based filtering is disabled and all matching issues are processed regardless of tags.
 
-Works with Redmine 4.x
+Works with Redmine 6.1, 5.x, 4.x.
 
 == Configuration
 
@@ -23,4 +25,3 @@ Plugin provides two rake tasks:
 You can place into crontab something like that:
 
 	0 1 * * * cd REDMINE_ROOT && bundle exec rake autoprogress:perform RAILS_ENV=production
-

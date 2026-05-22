@@ -5,6 +5,7 @@ module RedmineAutoprogress
       projects = Project.where({ id: Setting.plugin_redmine_autoprogress['projects'] })
       STDERR.puts("Check autoprogress for tag #{tag} and projects #{projects.map(&:name).join(', ')}")
 
+      count = 0
       projects.each do |project|
         project.issues.open.each do |issue|
           next unless issue.start_date && issue.due_date && issue.due_date > issue.start_date
@@ -22,8 +23,10 @@ module RedmineAutoprogress
           next unless issue.done_ratio.nil? || issue.done_ratio != progress
 
           yield [issue, progress]
+          count += 1
         end
       end
+      STDERR.puts("Found #{count} issues")
     end
 
     def self.preview

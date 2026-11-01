@@ -8,8 +8,10 @@
 
 <% if Issue.respond_to?(:available_tags) %>
 <p><label><%=t 'autoprogress.tag.label' %>: </label>
+  <% autoprogress_tags = Issue.available_tags.collect{|u| [u.name, u.name]}.sort.uniq %>
+  <% autoprogress_tag = @settings['tag'] if autoprogress_tags.any? {|_, name| name == @settings['tag']} %>
   <%= select_tag 'settings[tag]',
-    options_for_select(Issue.available_tags.collect{|u| [u.name, u.name]}.sort.uniq,
-      @settings['tag']) %>
+    options_for_select(autoprogress_tags, autoprogress_tag || ''),
+    include_blank: true %>
 </p>
 <% end %>
